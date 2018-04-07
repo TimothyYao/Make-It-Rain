@@ -8,7 +8,7 @@ web:
    - .:/usr/src/app/
   environment:
    NODE_ENV: production
-   MONGO_URL: mongodb://db:27017/mern-starter
+   MONGO_URL: mongodb://user1:password1@ds237409.mlab.com:37409/make_it_rain
 db:
   image: mongo:latest
   ports:
