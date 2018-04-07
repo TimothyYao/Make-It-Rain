@@ -1,27 +1,50 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Sidebar from 'react-sidebar';
 
 // Import Style
 import styles from './App.css';
 
 // Import Components
 import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
+// import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+
+const mql = window.matchMedia('(min-width: 800px)');
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { isMounted: false };
+    this.state = {
+      isMounted: false,
+      sideBarOpen: true,
+      mql: mql,
+      docked: props.docked,
+      open: props.open,
+    };
+    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
   componentDidMount() {
-    this.setState({isMounted: true}); // eslint-disable-line
+    mql.addListener(this.mediaQueryChanged);
+    this.setState({ msql: mql, sidebarDocked: mql.matches, isMounted: true }); // eslint-disable-line
+  }
+
+  componentWillUnmount() {
+    this.state.mql.removeListener(this.mediaQueryChanged);
+  }
+
+  onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
+  }
+
+  mediaQueryChanged() {
+    this.setState({ sidebarDocked: this.state.mql.matches });
   }
 
   toggleAddPostSection = () => {
@@ -29,27 +52,36 @@ export class App extends Component {
   };
 
   render() {
+    let sidebarContent = <b>Sidebar content</b>;
+    let sidebarProps = {
+      sidebar: this.state.sidebarOpen,
+      docked: this.state.sidebarDocked,
+      onSetOpen: this.onSetSidebarOpen,
+    };
     return (
       <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
-        <div>
-          <Helmet
-            title="Make it Rain Boys"
-            titleTemplate="%s - Finance App"
-            meta={[
-              { charset: 'utf-8' },
-              {
-                'http-equiv': 'X-UA-Compatible',
-                content: 'IE=edge',
-              },
-              {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-              },
-            ]}
-          />
+        <Helmet
+          title="Make it Rain Boys"
+          titleTemplate="%s - Finance App"
+          meta={[
+            { charset: 'utf-8' },
+            {
+              'http-equiv': 'X-UA-Compatible',
+              content: 'IE=edge',
+            },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+          ]}
+        />
+        <Sidebar
+          sidebar={sidebarContent}
+          open={this.state.sidebarOpen}
+          docked={this.state.sidebarDocked}
+          onSetOpen={this.onSetSidebarOpen}
+        >
           <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
             toggleAddPost={this.toggleAddPostSection}
           />
@@ -57,7 +89,7 @@ export class App extends Component {
             {this.props.children}
           </div>
           <Footer />
-        </div>
+        </Sidebar>
       </div>
     );
   }

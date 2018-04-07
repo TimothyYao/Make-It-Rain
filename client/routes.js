@@ -31,6 +31,14 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
+          cb(null, require('./modules/Login/LoginPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/all-posts"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
           cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
         });
       }}
