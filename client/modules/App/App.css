@@ -8,7 +8,7 @@
 
 .sidebar {
   height: 100%;
-  width: 50vw;
+  width: 75vw;
   padding: 10px 15px;
   color: white;
   background-color: rgba(29, 102, 166, 0.726);
@@ -18,10 +18,6 @@
 .sidebar b{
   padding-bottom: 5px;
   display: block;
-}
-
-.sidebar a:first-child {
-  padding-top: 12px;
 }
 
 .sidebar a {
