@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Geolocation API</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/css/esri.css">
+    
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+      }
+
+     @-webkit-keyframes
+       pulse
+      {
+        0%
+        {
+          opacity: 1.0;
+
+        }
+        45%
+        {
+          opacity: .20;
+
+        }
+        100%
+        {
+          opacity: 1.0;
+
+        }
+      }
+     @-moz-keyframes
+       pulse
+      {
+        0%
+        {
+          opacity: 1.0;
+        }
+        45%
+        {
+          opacity: .20;
+
+        }
+        100%
+        {
+          opacity: 1.0;
+        }
+      }
+
+      #map_graphics_layer {
+        -webkit-animation-duration: 3s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-name: pulse;
+        -moz-animation-duration: 3s;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-name: pulse;
+      }
+    </style>
+
+    <script src="https://js.arcgis.com/3.23compact/"> </script>
+    <script>
+      var map;
+      var graphic;
+      var currLocation;
+      var watchId;
+      require([
+        "esri/map", "esri/geometry/Point", "esri/tasks/query", "esri/layers/FeatureLayer",
+        "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
+        "esri/graphic", "esri/Color", "esri/dijit/InfoWindowLite",
+        "esri/InfoTemplate", "dojo/dom-construct", "esri/dijit/PopupMobile", "esri/arcgis/utils", "dojo/string", "dojo/domReady!"
+      ], function(
+        Map, Point, Query, FeatureLayer,
+        SimpleMarkerSymbol, SimpleLineSymbol,
+        Graphic, Color, InfoWindowLite,
+          InfoTemplate, domConstruct, PopupMobile, arcgisUtils, string 
+      ) {
+        map = new Map("map", {
+          basemap: "streets",
+          center: [-85.957, 17.140],
+          zoom: 2, 
+        });
+        map.on("load", initFunc);
+
+        function orientationChanged() {
+          if(map){
+            map.reposition();
+            map.resize();
+          }
+        }
+
+        function initFunc(map) {
+          if( navigator.geolocation ) {  
+            navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
+            watchId = navigator.geolocation.watchPosition(showLocation, locationError);
+          } else {
+            alert("Browser doesn't support Geolocation. Visit http://caniuse.com to see browser support for the Geolocation API.");
+          }
+        }
+
+        function locationError(error) {
+          //error occurred so stop watchPosition
+          if( navigator.geolocation ) {
+            navigator.geolocation.clearWatch(watchId);
+          }
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              alert("Location not provided");
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              alert("Current location not available");
+              break;
+
+            case error.TIMEOUT:
+              alert("Timeout");
+              break;
+
+            default:
+              alert("unknown error");
+              break;
+          }
+        }
+
+        function zoomToLocation(location) {
+          var pt = new Point(location.coords.longitude, location.coords.latitude);
+          addGraphic(pt);
+          map.centerAndZoom(pt, 12);
+        }
+
+        function showLocation(location) {
+          //zoom to the users location and add a graphic
+          var pt = new Point(location.coords.longitude, location.coords.latitude);
+          if ( !graphic ) {
+            addGraphic(pt);
+          } else { // move the graphic if it already exists
+            graphic.setGeometry(pt);
+          }
+          map.centerAt(pt);
+          var query = new Query();
+          console.log("query");
+
+          var infoWindow = new InfoWindowLite(null, domConstruct.create("div", null, null, map.root));
+          infoWindow.startup();
+          map.setInfoWindow(infoWindow);
+
+          var template = new InfoTemplate();
+          template.setTitle("<b>${User_name}</b>");
+          template.setContent("Dolla dolla bill yall." +"<br /> <a target='_blank' href=https://en.wikipedia.org/wiki/> $$$</a>"); 
+          var lyr = new FeatureLayer("https://services8.arcgis.com/xNS0rW6JiA50bfr5/arcgis/rest/services/users/FeatureServer/0" , {
+            mode: FeatureLayer.MODE_ONDEMAND,
+            infoTemplate:template,
+            outFields: ["*"]
+
+          });
+          map.addLayer(lyr);
+          map.infoWindow.resize(200, 50);
+          
+
+
+
+          // var infoWindow = new InfoWindowLite(null, domConstruct.create("div", null, null, map.root));
+          // infoWindow.startup();
+          // map.setInfoWindow(infoWindow);
+
+          // var template = new InfoTemplate();
+          // template.setTitle("<b>${User_name}</b>");
+          // template.setContent("${User_name} is here so lets make it rain.");
+
+
+          console.log("hi");
+          lyr.on("update-end", function() {
+            console.log("layer added");
+            var username = "katherine";
+            // { getLocation }
+            var query = new Query();
+            query.where = "User_name = '" + username + "'";
+
+            // query.objectIds = [features[0].attributes.OBJECTID];
+            
+            console.log("query.where");
+            query.outFields = [ "*" ];
+            console.log("outFields");
+            var attr = {
+              "User_name": username,
+              "Last_updated": new Date()
+
+              };
+            console.log(pt);
+            var graphic = new Graphic(pt, null, attr);
+
+            lyr.queryFeatures(query, function(featureSet) { 
+                // console.log("featureSet");
+                // console.log([featureSet[0].attributes.OBJECTID]);
+
+                // console.log(featureSet.Attributes("OBJECTID"));
+                // console.log(featureSet.features.length);
+                // console.log(featureSet);
+
+                if(featureSet.features.length === 0)
+                {
+                  console.log(graphic);
+                  
+                  lyr.applyEdits([graphic], null, null,
+                    (results) => console.log(results),
+                    (err) => console.log(err)
+                  ); 
+                } 
+                else{
+                  let update = featureSet.features[0];
+                  let time = new Date();
+                  let updGraphic = new Graphic(update.geometry, null, {...update.attributes, last_updated: time.getTime()}, null)
+                  console.log(updGraphic);
+                  lyr.applyEdits(null, [updGraphic], null,
+                    (results) => console.log(results),
+                    (err) => console.log(err)
+                  ); 
+                }
+
+
+              });
+            // for user in object g
+
+
+            }, function(error) {
+              console.log(error);
+            }  
+
+          );
+
+          console.log("hi");
+        }
+
+        // function populateMap(){
+        //   var query = new Query();
+        //   query.where = "1=1";
+        //   query.outFields = ["*"];
+        //   for (var i = 0; i < featureSet.features.length; i  ) {
+        //   var feature = featureSet.features[i];
+        //   console.log("Polygon geometry cache, %o", feature.geometry.cache);
+        //   feature.geometry.clearCache();
+        //   console.log("Polygon geometry clear cache, %o", feature.geometry.cache);
+        //   // Break out of the loop after the first result
+        //   break;
+        //   }
+        // };
+
+        // }
+        
+        function addGraphic(pt){
+          var symbol = new SimpleMarkerSymbol(
+            SimpleMarkerSymbol.STYLE_CIRCLE, 
+            12, 
+            new SimpleLineSymbol(
+              SimpleLineSymbol.STYLE_SOLID,
+              new Color([210, 105, 30, 0.5]), 
+              8
+            ), 
+            new Color([210, 105, 30, 0.9])
+          );
+          graphic = new Graphic(pt, symbol);
+          map.graphics.add(graphic);
+        }
+      });
+    </script>
+  </head>
+  
+  <body onorientationchange="orientationChanged();">
+    <div id="map" style="width:100%; height:100%;"></div>
+  </body>
+
+</html>
