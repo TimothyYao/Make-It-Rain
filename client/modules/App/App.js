@@ -14,42 +14,24 @@ import Footer from './components/Footer/Footer';
 // Import Actions
 import { toggleAddPost } from './AppActions';
 
-const mql = window.matchMedia('(min-width: 800px)');
-
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isMounted: false,
       sideBarOpen: false,
-      mql: mql,
       docked: props.docked,
       open: props.open,
     };
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
-    this.setState({ mql: mql, sidebarDocked: mql.matches });
-  }
-
   componentDidMount() {
-    mql.addListener(this.mediaQueryChanged);
     this.setState({ isMounted: true }); // eslint-disable-line
-  }
-
-  componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
   }
 
   onSetSidebarOpen(open) {
     this.setState({ sidebarOpen: open });
-  }
-
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: this.state.mql.matches });
   }
 
   toggleAddPostSection = () => {

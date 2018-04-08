@@ -5,20 +5,24 @@ import { FormattedMessage } from 'react-intl';
 // Import Style
 import styles from './Header.css';
 
-export function Header(props, context) {
+export function Header(props) {
   return (
     <div className={styles.header}>
-      <p className={styles['menu-button']} onClick={props.toggleSideBar}>&#9776;</p>
-      <div className={styles.content}>
-        <h1 className={styles['site-title']}>
-          <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
-        </h1>
-        {
-          context.router.isActive('/', true)
-            ? <a className={styles['add-post-button']} href="#" onClick={props.toggleAddPost}><FormattedMessage id="addPost" /></a>
-            : null
-        }
-      </div>
+      <ul className={styles.navcontainer}>
+        <li className={styles.navitem}>
+          <p className={styles['menu-button']} onClick={props.toggleSideBar}>&#9776;</p>
+        </li>
+        <li className={styles.navitem}>
+          <p className={styles['site-title']}>
+            <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
+          </p>
+        </li>
+        <li className={styles.navitem}>
+          <p className={styles['money-button']}>
+            <Link to="/raining">$</Link>
+          </p>
+        </li>
+      </ul>
     </div>
   );
 }

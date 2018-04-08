@@ -1,22 +1,38 @@
 .header {
-  background: #eee url('../../header-bk.png') center;
+  background-color: black;
   background-size: cover;
   border-bottom: 1px solid #ccc;
   padding: 5px 15px;
+  overflow: auto;
+}
+
+.navcontainer {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  vertical-align: center;
+  text-align: center;
+}
+
+.navitem {
+  display: inline;
+  text-align: center;
 }
 
 .content {
   width: 100%;
   max-width: 980px;
   margin: auto;
-  padding: 64px 16px;
+  padding: 5px 16px;
   overflow: auto;
 }
 
 .site-title {
   font-weight: 300;
-  font-size: 42px;
-  float: left;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
 }
 
 .site-title a {
@@ -24,27 +40,18 @@
   color: #FFF;
 }
 
-.add-post-button {
-  display: inline-block;
-  color: #FFF;
-  background: #03A9F4;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 1000px;
+.menu-button {
+  cursor: pointer;
+  float: left;
+  color: white;
+}
+
+.money-button {
+  cursor: pointer;
   float: right;
 }
 
-.menu-button {
-  cursor: pointer;
-  display: none;
-}
-
-@media (max-width: 800px){
-  .add-post-button{
-    float: left;
-    margin-top: 16px;
-  }
-  .menu-button {
-    display: block;
-  }
+.money-button a {
+  text-decoration: none;
+  color: #FFF;
 }
