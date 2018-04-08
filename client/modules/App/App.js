@@ -46,7 +46,7 @@ export class App extends Component {
   };
 
   closeSideBar = () => {
-    this.setState({sidebarOpen: false});
+    this.setState({ sidebarOpen: false });
   }
 
   render() {
@@ -56,15 +56,17 @@ export class App extends Component {
         <b>Scrooge McDuck</b>
         <hr></hr>
         <a href="#">QR Code</a>
-        <a href="#">Location</a>
+        <Link onClick={this.closeSideBar} to="/map">
+          Location
+        </Link>
         <a href="#">History</a>
         <a href="#">Settings</a>
-        <p><Link 
-        onClick={this.closeSideBar}
-        to="/contact" >Contact</Link> </p>
-        <p><Link
-        onClick={this.closeSideBar}
-         to="/about" >About</Link></p>
+        <Link onClick={this.closeSideBar} to="/contact">
+          Contact
+        </Link>
+        <Link onClick={this.closeSideBar} to="/about">
+          About
+        </Link>
       </div>
     );
 
@@ -104,7 +106,11 @@ export class App extends Component {
           <div className={styles.container}>
             {this.props.children}
           </div>
-          <Footer />
+          {
+            this.props.location.pathname === '/raining'
+              ? null
+              : <Footer />
+          }
         </Sidebar>
       </div>
     );
