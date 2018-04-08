@@ -34,7 +34,7 @@ class Raining extends React.Component {
       this.setState({
         fade: false,
       });
-    }, 500);
+    }, 200);
   };
 
   render() {
