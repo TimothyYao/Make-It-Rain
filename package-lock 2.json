@@ -15105,14 +15105,6 @@
         "prop-types": "15.6.1"
       }
     },
-    "react-easy-swipe": {
-      "version": "0.0.13",
-      "resolved": "https://registry.npmjs.org/react-easy-swipe/-/react-easy-swipe-0.0.13.tgz",
-      "integrity": "sha1-wA6Q2r7Y0IeOjIMTuGfgFDXw9jc=",
-      "requires": {
-        "prop-types": "15.6.1"
-      }
-    },
     "react-hammerjs": {
       "version": "1.0.1",
       "resolved": "https://registry.npmjs.org/react-hammerjs/-/react-hammerjs-1.0.1.tgz",

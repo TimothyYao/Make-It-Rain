@@ -9,8 +9,7 @@ export function ContactPage() {
     <div className={styles.contact}>
       <h1>Contact Page</h1>
       <p>Contact Arkham City if you have any questions!</p>
-      <img style={{"width": '100%'}} src={photo}></img>
-        
+      <img style={{ width: '100%' }} src={photo}></img>
     </div>
   );
 }
