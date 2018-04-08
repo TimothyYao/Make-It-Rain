@@ -6,53 +6,49 @@ import styles from './Raining.css';
 class Raining extends React.Component {
   constructor(props) {
     super(props);
-    this.updatePosition = this.updatePosition.bind(this);
-    this.next = this.next.bind(this);
-
     this.state = {
-      images: [],
-      slidesLength: null,
-      currentPosition: 0,
-      slideTransform: 0,
-      interval: null,
+      fade: false,
+      dollars: 0,
     };
+    this.fadingDone = this.fadingDone.bind(this);
   }
-
   componentDidMount() {
-    this.hammer = hammer(this._slider);
-    this.hammer.on('swipeleft', this.next);
+    const elm = this.refs.button;
+    elm.addEventListener('animationend', this.fadingDone);
   }
-
   componentWillUnmount() {
-    this.hammer.off('swipeleft', this.next());
-    this.hammer.off('swiperight', this.prev());
+    const elm = this.refs.button;
+    elm.removeEventListener('animationend', this.fadingDone);
   }
-
-  updatePosition(nextPosition) {
-    const { visibleItems, currentPosition } = this.state;
-    return nextPosition;
+  fadingDone() {
+    // will re-render component, removing the animation class
+    this.setState({ fade: false });
   }
-
-  next() {
-    console.log('swipe');
-    const currentPosition = this.updatePosition(this.state.currentPosition - 10);
-    this.setState({ currentPosition });
-  }
-
-
-  handleSwipe() {
-    console.log('swipe');
-  }
+  cashing = () => {
+    this.setState({
+      fade: true,
+      dollars: this.state.dollars + 1,
+    });
+    setTimeout(() => {
+      this.setState({
+        fade: false,
+      });
+    }, 500);
+  };
 
   render() {
+    const fade = this.state.fade;
     return (
       <div>
-        <div className={styles.money}></div>
-        {/* <Hammer
-          onSwipe={handleSwipe}
-        >
-          <div className={styles.money}></div>
-        </Hammer> */}
+        <div className={styles.money}>
+          <div
+            className={styles.money}
+            onClick={this.cashing}
+            className={fade ? `${styles.money} ${styles.cashing}` : styles.money}
+          >
+          </div>
+        </div>
+        <h1>Dollars: {this.state.dollars}</h1>
       </div>
     );
   }

@@ -1,9 +1,14 @@
 .money {
   height: 70vh;
-  background-image: url("./dollar-bill.png");
+  background-image: url("https://i.imgur.com/MXHkTka.png");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
+  background-position: center; 
+}
+
+.cashing {
+  transform: translateY(-100vh);
+  transition: all 500ms ease-in-out;
 }
 
 .container {

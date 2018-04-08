@@ -2,7 +2,10 @@
 import React from 'react';
 
 export function MapPage() {
-  const iframe = '<iframe src="./katherines_base.html" width="540" height="450"></iframe>';
+  const iframe = {
+    __html: '<iframe src="./katherines_base.html" width="540" height="450"></iframe>',
+  };
+
   return (
     <div>
       <div dangerouslySetInnerHTML={iframe} />
