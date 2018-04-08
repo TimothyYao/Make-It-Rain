@@ -1,0 +1,22 @@
+.pic {
+  height: 30vh;
+  background-size: cover;
+  background: url("./money-bag.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.container {
+  border: 1px solid rgba(0,0,0,0.2);
+  max-width: 700px;
+  margin: 0 100px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.header {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding: 10px 15px;
+}
