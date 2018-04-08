@@ -30,7 +30,7 @@
 
 .site-title {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
   display: inline-block;
   text-align: center;
 }
@@ -44,11 +44,13 @@
   cursor: pointer;
   float: left;
   color: white;
+  font-size: 20px;
 }
 
 .money-button {
   cursor: pointer;
   float: right;
+  font-size: 20px;
 }
 
 .money-button a {
