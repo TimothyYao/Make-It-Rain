@@ -1,0 +1,11 @@
+.money {
+  height: 70vh;
+  background-image: url("./dollar-bill.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.container {
+  padding: 20px 30px;
+}

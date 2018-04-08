@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Info/AboutPage');
   require('./modules/Info/ContactPage');
   require('./modules/Raining/Raining');
+  require('./modules/Map/MapPage');
 }
 
 
@@ -81,6 +82,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Raining/Raining').default);
+        });
+      }}
+    />
+    <Route
+      path="/map"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Map/MapPage').default);
         });
       }}
     />

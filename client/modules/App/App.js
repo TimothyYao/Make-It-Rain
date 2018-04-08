@@ -15,6 +15,7 @@ import Footer from './components/Footer/Footer';
 // Import Actions
 import { toggleAddPost } from './AppActions';
 
+
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -46,13 +47,13 @@ export class App extends Component {
   render() {
     let sidebarContent = (
       <div className={styles.sidebar}>
-        <img src={scrooge}></img>
+        <img styles={{ width: '30px' }} src={scrooge}></img>
         <b>Scrooge McDuck</b>
         <hr></hr>
-        <a href="#">QR Code</a>  
-        <a href="#">Location</a>  
+        <a href="#">QR Code</a>
+        <a href="#">Location</a>
         <a href="#">History</a>
-        <a href="#">Settings</a>  
+        <a href="#">Settings</a>
       </div>
     );
 
