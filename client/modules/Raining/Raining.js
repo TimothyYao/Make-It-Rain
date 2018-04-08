@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import styles from './Raining.css';
+import Swipe from 'react-easy-swipe';
 
 
 class Raining extends React.Component {
@@ -39,16 +40,23 @@ class Raining extends React.Component {
   render() {
     const fade = this.state.fade;
     return (
-      <div>
+      <div className={styles.container}>
         <div className={styles.money}>
-          <div
-            className={styles.money}
-            onClick={this.cashing}
-            className={fade ? `${styles.money} ${styles.cashing}` : styles.money}
+          <Swipe
+            onSwipeUp={this.cashing}
+            allowMouseEvents={true}
           >
-          </div>
+            <div
+              className={styles.money}
+              onClick={this.cashing}
+              className={fade ? `${styles.money} ${styles.cashing}` : styles.money}
+            >
+            </div>
+          </Swipe>
         </div>
-        <h1>Dollars: {this.state.dollars}</h1>
+        <div className={styles.info}>
+          <h1>Dollars: {this.state.dollars}</h1>
+        </div>
       </div>
     );
   }

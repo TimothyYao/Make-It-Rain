@@ -1,9 +1,13 @@
 .money {
-  height: 70vh;
+  height: 60vh;
   background-image: url("https://i.imgur.com/MXHkTka.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center; 
+}
+
+.container {
+  padding: 15px;
 }
 
 .cashing {
@@ -11,6 +15,6 @@
   transition: all 500ms ease-in-out;
 }
 
-.container {
-  padding: 20px 30px;
+.info {
+  padding: 15px;
 }
