@@ -7,7 +7,10 @@
 }
 
 .sidebar {
+<<<<<<< HEAD
   background-color: cornflowerblue;
+=======
+>>>>>>> c77483dc4e6a8f530be4467f474d7d72ca0dd362
   height: 100%;
   width: 50vw;
   padding: 10px 15px;
@@ -20,21 +23,13 @@
   padding-bottom: 5px;
   display: block;
 }
-
-.sidebar a:first-child {
-  padding-top: 12px;
-}
-
 .sidebar a {
-  margin-top: 5px;
-  padding: 5px 0;
+  padding: 6px 0;
   display: block;
   text-decoration: none;
   color: white;
-}
+  font: 200;
 
-.sidebar a:hover{
-  background-color: black;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 800px) {
