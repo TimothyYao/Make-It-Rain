@@ -1,9 +1,10 @@
 // Export Constants
-export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 
 // Export Actions
-export function toggleAddPost() {
+
+export function toggleSideBar() {
   return {
-    type: TOGGLE_ADD_POST,
+    type: TOGGLE_SIDEBAR,
   };
 }

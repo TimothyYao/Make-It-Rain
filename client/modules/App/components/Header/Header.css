@@ -2,6 +2,7 @@
   background: #eee url('../../header-bk.png') center;
   background-size: cover;
   border-bottom: 1px solid #ccc;
+  padding: 5px 15px;
 }
 
 .content {
@@ -33,36 +34,17 @@
   float: right;
 }
 
-.language-switcher {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.language-switcher ul {
-  list-style: none;
-  width: 980px;
-  margin: auto;
-  text-align: right;
-}
-
-.language-switcher li {
-  display: inline-block;
-  margin: 10px;
-  padding: 5px;
+.menu-button {
   cursor: pointer;
-  color: #fff;
+  display: none;
 }
 
-.language-switcher li:first-child {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.selected {
-  border-bottom: 1px solid #fff;
-}
-
-@media (max-width: 767px){
+@media (max-width: 800px){
   .add-post-button{
     float: left;
     margin-top: 16px;
+  }
+  .menu-button {
+    display: block;
   }
 }

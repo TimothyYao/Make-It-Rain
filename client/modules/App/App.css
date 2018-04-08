@@ -4,3 +4,14 @@
   padding: 15px;
   margin: 0 auto;
 }
+
+.sidebar {
+  background-color: white;
+  height: 100%;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 800px) {
+  .sidebar {
+    width: 75vw;
+  }
+}

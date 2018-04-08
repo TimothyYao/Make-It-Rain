@@ -21,7 +21,7 @@ export class App extends Component {
     super(props);
     this.state = {
       isMounted: false,
-      sideBarOpen: true,
+      sideBarOpen: false,
       mql: mql,
       docked: props.docked,
       open: props.open,
@@ -30,9 +30,14 @@ export class App extends Component {
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
+  componentWillMount() {
+    mql.addListener(this.mediaQueryChanged);
+    this.setState({ mql: mql, sidebarDocked: mql.matches });
+  }
+
   componentDidMount() {
     mql.addListener(this.mediaQueryChanged);
-    this.setState({ msql: mql, sidebarDocked: mql.matches, isMounted: true }); // eslint-disable-line
+    this.setState({ isMounted: true }); // eslint-disable-line
   }
 
   componentWillUnmount() {
@@ -51,8 +56,18 @@ export class App extends Component {
     this.props.dispatch(toggleAddPost());
   };
 
+  toggleSideBar = () => {
+    this.setState({ sidebarOpen: !this.state.open });
+  };
+
   render() {
-    let sidebarContent = <b>Sidebar content</b>;
+    let sidebarContent = (
+      <div className={styles.sidebar}>
+        <b>Sidebar content</b>
+        <p>More stuff</p>
+      </div>
+    );
+
     let sidebarProps = {
       sidebar: this.state.sidebarOpen,
       docked: this.state.sidebarDocked,
@@ -83,6 +98,7 @@ export class App extends Component {
         >
           <Header
             intl={this.props.intl}
+            toggleSideBar={this.toggleSideBar}
             toggleAddPost={this.toggleAddPostSection}
           />
           <div className={styles.container}>

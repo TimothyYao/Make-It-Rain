@@ -8,6 +8,7 @@ import styles from './Header.css';
 export function Header(props, context) {
   return (
     <div className={styles.header}>
+      <p className={styles['menu-button']} onClick={props.toggleSideBar}>&#9776;</p>
       <div className={styles.content}>
         <h1 className={styles['site-title']}>
           <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
@@ -28,6 +29,7 @@ Header.contextTypes = {
 
 Header.propTypes = {
   toggleAddPost: PropTypes.func.isRequired,
+  toggleSideBar: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };
 
