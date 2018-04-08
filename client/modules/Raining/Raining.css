@@ -3,7 +3,8 @@
   background-image: url("https://i.imgur.com/MXHkTka.png");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center; 
+  background-position: center;
+  -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -12,7 +13,7 @@
 
 .cashing {
   transform: translateY(-100vh);
-  transition: all 500ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .info {
