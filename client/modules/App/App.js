@@ -4,6 +4,7 @@ import Sidebar from 'react-sidebar';
 
 // Import Style
 import styles from './App.css';
+import scrooge from './scrooge-mcduck.png';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -45,8 +46,13 @@ export class App extends Component {
   render() {
     let sidebarContent = (
       <div className={styles.sidebar}>
-        <b>Sidebar content</b>
-        <p>More stuff</p>
+        <img src={scrooge}></img>
+        <b>Scrooge McDuck</b>
+        <hr></hr>
+        <a href="#">QR Code</a>  
+        <a href="#">Location</a>  
+        <a href="#">History</a>
+        <a href="#">Settings</a>  
       </div>
     );
 
