@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import Sidebar from 'react-sidebar';
 
 // Import Style
@@ -44,6 +45,10 @@ export class App extends Component {
     this.setState({ sidebarOpen: !this.state.open });
   };
 
+  closeSideBar = () => {
+    this.setState({sidebarOpen: false});
+  }
+
   render() {
     let sidebarContent = (
       <div className={styles.sidebar}>
@@ -54,6 +59,12 @@ export class App extends Component {
         <a href="#">Location</a>
         <a href="#">History</a>
         <a href="#">Settings</a>
+        <p><Link 
+        onClick={this.closeSideBar}
+        to="/contact" >Contact</Link> </p>
+        <p><Link
+        onClick={this.closeSideBar}
+         to="/about" >About</Link></p>
       </div>
     );
 
