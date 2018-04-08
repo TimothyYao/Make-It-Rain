@@ -6,7 +6,15 @@ import styles from './LoginPage.css';
 export function LoginPage() {
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>Welcome</h1>
+      <h1 className={styles.header}>
+        <font color="#1D65A6">W</font>
+        <font color="#00743F">e</font>
+        l
+        <font color="#1D65A6">c</font>
+        <font color="#00743F">o</font>
+        m
+        <font color="#1D65A6">e</font>
+      </h1>
       <form>
         <div className={styles.pic}></div>
         <div>
@@ -27,7 +35,7 @@ export function LoginPage() {
               <td><small><a href="">Forget your password?</a></small></td>
             </tr>
             <tr>
-              <td><input type="submit" value="Submit" /></td>
+              <td><input type="submit" value="Submit" className={styles.submitButton} /></td>
             </tr>
           </table></center>
         </div>

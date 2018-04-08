@@ -3,7 +3,7 @@
   background-size: cover;
   background: url("./money-send.png");
   background-position: center;
-  background-size: contain;
+  background-size: 7em;
   background-repeat: no-repeat;
 }
 
@@ -18,7 +18,7 @@
 
 .header {
   font-family: "Arial Black", "Comic Sans MS", "Helvetica Neue";
-  color: #FFB053;
+  color: #F2A104;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   padding: 10px 15px;
 }
@@ -32,10 +32,26 @@ input {
 
 td {
   font-family: "Arial Black";
-  color: #FEB968;
+  color: #F2A104;
   text-align: center;
 }
 
 table {
   margin-bottom: 1em;
+}
+
+a {
+  color: #03A9F4;
+  font-family: "Comic Sans MS";
+  text-decoration: none;
+}
+
+a:hover{
+  color: #FEB968;
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 6em;
+  color: #1D65A6;
 }
