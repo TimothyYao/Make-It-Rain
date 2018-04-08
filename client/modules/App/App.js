@@ -52,7 +52,7 @@ export class App extends Component {
   render() {
     let sidebarContent = (
       <div className={styles.sidebar}>
-        <img styles={{ width: '30px' }} src={scrooge}></img>
+        <img styles={{ width: '30px' }} src='https://images.forbes.com/media/lists/fictional/2011/scrooge-mcduck.png'></img>
         <b>Scrooge McDuck</b>
         <hr></hr>
         <a href="#">QR Code</a>
